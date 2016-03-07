@@ -18,39 +18,39 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        int sticks = 21;
+        boolean evaluateEnd = false;
+
         System.out.println("Go 1st? y/n?");
         Scanner input = new Scanner(System.in);
         String first = input.nextLine();
 
-        int toTake = 0;
-        int sticks = 21;
-        boolean evaluateEnd = false;
-
         while (sticks > 0) {
             if (first.equals("y") || first.equals("Y")) {
-                System.out.println("there are " + sticks + " sticks");
+                System.out.println("There are " + sticks + " sticks");
                 System.out.println("How many do you want to take? 1 or 2?");
 
-                int Take = askUserForSticks();
-                sticks = sticksCount(Take);
+                int take = askUserForSticks();
+                sticks = takeCheck(take);
+                sticksCount(sticks);
 
                 if (evaluateEnd) {
                     System.out.println("You Lost!");
                 } else {
-                    cpuEvaluateMove(sticks);
-                    sticks = sticksCount(Take);
+                    take = cpuEvaluateMove(sticks);
+                    sticksCount(sticks);
 
-                    System.out.println("CPU takes " + toTake + " sticks.");
+                    System.out.println("CPU takes " + take + " sticks.");
 
                     if (evaluateEnd) {
                         System.out.println("You win ! ! !");
                     }
                 }
             } else {
-                cpuEvaluateMove(sticks);
-                sticks = sticksCount(toTake);
+                int take = cpuEvaluateMove(sticks);
+                sticksCount(sticks);
 
-                System.out.println("CPU took " + toTake + "sticks");
+                System.out.println("CPU takes " + take + "sticks");
 
                 if (evaluateEnd) {
                     System.out.println("You Win ! ! !");
@@ -58,8 +58,9 @@ public class Main {
                     System.out.println("there are " + sticks + " sticks");
                     System.out.println("How many do you want to take? 1 or 2?");
 
-                    askUserForSticks();
-                    sticks = sticksCount(toTake);
+                    take = askUserForSticks();
+                    sticks = takeCheck(take);
+                    sticksCount(sticks);
 
                     cpuEvaluateMove(sticks);
 
@@ -80,17 +81,20 @@ public class Main {
         return toTake;
     }
 
-    public static int sticksCount(int t) {
-        
-        int toTake=0;
+    public static int takeCheck(int t) {
+        int toTake = 0;
         if (t > 2) {
             toTake = 2;
         } else if (t
                 < 1) {
             toTake = 1;
         }
-        sticksCount = sticksCount - toTake;
-        return sticksCount;
+        return toTake;
+    }
+
+    public static int sticksCount(int n) {
+        sticks = sticks - n;
+        return sticks;
     }
 
     boolean evaluateEnd(int s) {
