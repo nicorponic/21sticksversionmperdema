@@ -37,7 +37,7 @@ public class Main {
                 if (evaluateEnd) {
                     System.out.println("You Lost!");
                 } else {
-                    cpuEvaluateMove(Take);
+                    cpuEvaluateMove(sticks);
                     sticks = sticksCount(Take);
 
                     System.out.println("CPU takes " + toTake + " sticks.");
@@ -81,7 +81,7 @@ public class Main {
     }
 
     public static int sticksCount(int t) {
-        int sticksCount;
+        
         int toTake=0;
         if (t > 2) {
             toTake = 2;
@@ -89,7 +89,7 @@ public class Main {
                 < 1) {
             toTake = 1;
         }
-        sticksCount = sticks - toTake;
+        sticksCount = sticksCount - toTake;
         return sticksCount;
     }
 
